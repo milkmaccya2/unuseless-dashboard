@@ -9,13 +9,14 @@
     "preview": "wrangler pages dev dist"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.0",
     "@hono/react-renderer": "^1.0.0",
     "gsap": "^3.12.0",
-    "@gsap/react": "^2.1.0",
     "hono": "^4.7.0",
     "honox": "^0.1.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0"
   },
   "devDependencies": {
     "@hono/vite-build": "^1.0.0",

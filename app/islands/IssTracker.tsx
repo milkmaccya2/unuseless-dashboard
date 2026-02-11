@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { PiRocketLaunch } from 'react-icons/pi'
 import Card from '../components/Card'
 
 interface Props {
@@ -10,7 +11,7 @@ function haversineDistance(
   lat1: number, lon1: number,
   lat2: number, lon2: number
 ): number {
-  const R = 6371 // 地球の半径 (km)
+  const R = 6371
   const toRad = (deg: number) => (deg * Math.PI) / 180
   const dLat = toRad(lat2 - lat1)
   const dLon = toRad(lon2 - lon1)
@@ -44,30 +45,30 @@ export default function IssTracker({ latitude, longitude }: Props) {
     }
 
     fetchIss()
-    const interval = setInterval(fetchIss, 30_000) // 30秒ごと
+    const interval = setInterval(fetchIss, 30_000)
     return () => clearInterval(interval)
   }, [latitude, longitude])
 
   const isVisible = distance !== null && distance < 2000
 
   return (
-    <Card emoji="🛰" title="ISS（国際宇宙ステーション）" wide>
+    <Card icon={<PiRocketLaunch />} title="ISS（国際宇宙ステーション）" wide>
       {distance !== null ? (
         <>
-          <p className="text-3xl font-mono font-bold tabular-nums">
+          <p className="counter-value text-3xl font-mono font-bold tabular-nums text-violet-300">
             あなたから {Math.round(distance).toLocaleString()}km 先
           </p>
-          <p className={`text-lg mt-1 ${isVisible ? 'text-green-400' : 'text-gray-400'}`}>
-            {isVisible ? '見えるかも！空を見上げてみて！' : '見えません。残念。'}
+          <p className={`text-base mt-2 font-medium ${isVisible ? 'text-green-400' : 'text-gray-500'}`}>
+            {isVisible ? '見えるかも！ 空を見上げてみて！' : '見えません。残念。'}
           </p>
         </>
       ) : latitude === null ? (
-        <p className="text-xl text-gray-500">位置情報を取得中...</p>
+        <p className="text-xl text-gray-600">位置情報を取得中...</p>
       ) : (
-        <p className="text-xl text-gray-500">ISSの位置を取得中...</p>
+        <p className="text-xl text-gray-600">ISSの位置を取得中...</p>
       )}
       {issLat !== null && issLng !== null && (
-        <p className="text-xs text-gray-500 mt-1">
+        <p className="text-xs text-gray-600 mt-2">
           ISS現在位置: {issLat.toFixed(2)}°, {issLng.toFixed(2)}°（30秒ごとに更新）
         </p>
       )}

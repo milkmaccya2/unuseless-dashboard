@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import { PiBowlFood } from 'react-icons/pi'
 import Card from '../components/Card'
 
 const GRAINS_PER_MEAL = 3_250
@@ -47,23 +48,23 @@ export default function RiceCounter() {
   }
 
   return (
-    <Card emoji="🍚" title="食べたご飯の粒数">
+    <Card icon={<PiBowlFood />} title="食べたご飯の粒数">
       {grains !== null ? (
-        <p className="text-3xl font-mono font-bold tabular-nums">
+        <p className="counter-value text-3xl font-mono font-bold tabular-nums text-rose-300">
           {grains.toLocaleString()}粒
         </p>
       ) : (
-        <p className="text-xl text-gray-500">生年月日を入力してね</p>
+        <p className="text-xl text-gray-600">生年月日を入力してね</p>
       )}
       <div className="mt-3">
         <input
           type="date"
           value={birthday}
           onChange={handleChange}
-          className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5 text-sm text-gray-300 focus:outline-none focus:border-blue-500"
+          className="bg-gray-800/80 border border-gray-700/60 rounded-lg px-3 py-1.5 text-sm text-gray-300 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/30 transition-colors"
         />
       </div>
-      <p className="text-xs text-gray-500 mt-1">1食約{GRAINS_PER_MEAL.toLocaleString()}粒 × 1日{MEALS_PER_DAY}食で計算</p>
+      <p className="text-xs text-gray-600 mt-2">1食約{GRAINS_PER_MEAL.toLocaleString()}粒 × 1日{MEALS_PER_DAY}食で計算</p>
     </Card>
   )
 }
