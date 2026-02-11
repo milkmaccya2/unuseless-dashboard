@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { PiBowlFood } from 'react-icons/pi'
+import { UtensilsCrossed } from 'lucide-react'
 import Card from '../components/Card'
 
 const GRAINS_PER_MEAL = 3_250
@@ -48,7 +48,7 @@ export default function RiceCounter() {
   }
 
   return (
-    <Card icon={<PiBowlFood />} title="食べたご飯の粒数">
+    <Card icon={<UtensilsCrossed size={20} />} title="食べたご飯の粒数">
       {grains !== null ? (
         <p className="counter-value text-3xl font-mono font-bold tabular-nums text-rose-300">
           {grains.toLocaleString()}粒

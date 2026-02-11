@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { PiEyeBold } from 'react-icons/pi'
+import { Eye } from 'lucide-react'
 import Card from '../components/Card'
 
 const BLINKS_PER_MINUTE = 17
@@ -24,7 +24,7 @@ export default function BlinkCounter() {
   }, [])
 
   return (
-    <Card icon={<PiEyeBold />} title="まばたき">
+    <Card icon={<Eye size={20} />} title="まばたき">
       <p className="counter-value text-3xl font-mono font-bold tabular-nums text-indigo-300">
         今日 {count.toLocaleString()}回
       </p>

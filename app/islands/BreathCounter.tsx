@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { PiWind } from 'react-icons/pi'
+import { Wind } from 'lucide-react'
 import Card from '../components/Card'
 
 const BREATHS_PER_MINUTE = 15
@@ -24,7 +24,7 @@ export default function BreathCounter() {
   }, [])
 
   return (
-    <Card icon={<PiWind />} title="呼吸">
+    <Card icon={<Wind size={20} />} title="呼吸">
       <p className="counter-value text-3xl font-mono font-bold tabular-nums text-emerald-300">
         今日 {count.toLocaleString()}回
       </p>

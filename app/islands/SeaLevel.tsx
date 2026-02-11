@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { PiWaves } from 'react-icons/pi'
+import { Waves } from 'lucide-react'
 import Card from '../components/Card'
 
 interface Props {
@@ -28,14 +28,14 @@ export default function SeaLevel({ latitude, longitude }: Props) {
 
   if (latitude === null || longitude === null) {
     return (
-      <Card icon={<PiWaves />} title="海面上昇で沈む水位">
+      <Card icon={<Waves size={20} />} title="海面上昇で沈む水位">
         <p className="text-xl text-gray-600">位置情報を取得中...</p>
       </Card>
     )
   }
 
   return (
-    <Card icon={<PiWaves />} title="海面上昇で沈む水位">
+    <Card icon={<Waves size={20} />} title="海面上昇で沈む水位">
       {loading ? (
         <p className="text-xl text-gray-600">標高を取得中...</p>
       ) : elevation !== null ? (

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { PiToilet } from 'react-icons/pi'
+import { Bath } from 'lucide-react'
 import Card from '../components/Card'
 
 const WORLD_POPULATION = 8_100_000_000
@@ -18,7 +18,7 @@ export default function ToiletCounter() {
   }, [])
 
   return (
-    <Card icon={<PiToilet />} title="今トイレ中の地球人">
+    <Card icon={<Bath size={20} />} title="今トイレ中の地球人">
       <p className="counter-value text-3xl font-mono font-bold tabular-nums text-amber-300">
         約{(count / 100_000_000).toFixed(1)}億人
       </p>

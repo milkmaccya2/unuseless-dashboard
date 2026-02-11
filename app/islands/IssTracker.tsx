@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { PiRocketLaunch } from 'react-icons/pi'
+import { Rocket } from 'lucide-react'
 import Card from '../components/Card'
 
 interface Props {
@@ -52,7 +52,7 @@ export default function IssTracker({ latitude, longitude }: Props) {
   const isVisible = distance !== null && distance < 2000
 
   return (
-    <Card icon={<PiRocketLaunch />} title="ISS（国際宇宙ステーション）" wide>
+    <Card icon={<Rocket size={20} />} title="ISS（国際宇宙ステーション）" wide>
       {distance !== null ? (
         <>
           <p className="counter-value text-3xl font-mono font-bold tabular-nums text-violet-300">

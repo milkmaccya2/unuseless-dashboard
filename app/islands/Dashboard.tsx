@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { PiMapPinBold } from 'react-icons/pi'
+import { MapPin } from 'lucide-react'
 import Card from '../components/Card'
 import BlinkCounter from './BlinkCounter'
 import BreathCounter from './BreathCounter'
@@ -10,8 +8,6 @@ import RiceCounter from './RiceCounter'
 import RotationSpeed from './RotationSpeed'
 import SeaLevel from './SeaLevel'
 import IssTracker from './IssTracker'
-
-gsap.registerPlugin(useGSAP)
 
 interface GeoLocation {
   latitude: number
@@ -41,16 +37,18 @@ export default function Dashboard() {
     )
   }, [])
 
-  // GSAP staggered card entrance
-  useGSAP(() => {
-    gsap.from('.dashboard-card', {
-      y: 40,
-      opacity: 0,
-      duration: 0.7,
-      stagger: 0.1,
-      ease: 'power3.out',
+  // GSAP staggered card entrance (client-only)
+  useEffect(() => {
+    import('gsap').then(({ default: gsap }) => {
+      gsap.from('.dashboard-card', {
+        y: 40,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.1,
+        ease: 'power3.out',
+      })
     })
-  }, { scope: container })
+  }, [])
 
   return (
     <div ref={container} className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -62,7 +60,7 @@ export default function Dashboard() {
       <SeaLevel latitude={location?.latitude ?? null} longitude={location?.longitude ?? null} />
       <IssTracker latitude={location?.latitude ?? null} longitude={location?.longitude ?? null} />
       {geoError && (
-        <Card icon={<PiMapPinBold />} title="位置情報">
+        <Card icon={<MapPin size={20} />} title="位置情報">
           <p className="text-yellow-400 text-sm">{geoError}</p>
         </Card>
       )}

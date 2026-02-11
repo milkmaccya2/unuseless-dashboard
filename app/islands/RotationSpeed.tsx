@@ -1,4 +1,4 @@
-import { PiGlobeHemisphereWest } from 'react-icons/pi'
+import { Globe } from 'lucide-react'
 import Card from '../components/Card'
 
 const EQUATOR_SPEED_KMH = 1_670
@@ -10,7 +10,7 @@ interface Props {
 export default function RotationSpeed({ latitude }: Props) {
   if (latitude === null) {
     return (
-      <Card icon={<PiGlobeHemisphereWest />} title="地球の自転速度">
+      <Card icon={<Globe size={20} />} title="地球の自転速度">
         <p className="text-xl text-gray-600">位置情報を取得中...</p>
       </Card>
     )
@@ -19,7 +19,7 @@ export default function RotationSpeed({ latitude }: Props) {
   const speed = EQUATOR_SPEED_KMH * Math.cos((latitude * Math.PI) / 180)
 
   return (
-    <Card icon={<PiGlobeHemisphereWest />} title="地球の自転速度">
+    <Card icon={<Globe size={20} />} title="地球の自転速度">
       <p className="counter-value text-3xl font-mono font-bold tabular-nums text-cyan-300">
         {Math.round(speed).toLocaleString()} km/h
       </p>

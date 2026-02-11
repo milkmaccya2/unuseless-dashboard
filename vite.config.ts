@@ -1,4 +1,5 @@
 import tailwindcss from '@tailwindcss/vite'
+import build from '@hono/vite-build/cloudflare-pages'
 import honox from 'honox/vite'
 import { defineConfig } from 'vite'
 
@@ -18,12 +19,20 @@ export default defineConfig(({ mode }) => {
         emptyOutDir: false,
       },
     }
-  } else {
-    return {
-      ssr: {
-        external: ['react', 'react-dom'],
-      },
-      plugins: [honox(), tailwindcss()],
-    }
+  }
+
+  // SSR / dev shared config
+  const plugins = [honox(), tailwindcss()]
+
+  // build plugin is for production SSR build only, not dev
+  if (mode === 'production') {
+    plugins.push(build())
+  }
+
+  return {
+    ssr: {
+      external: ['react', 'react-dom', 'gsap'],
+    },
+    plugins,
   }
 })
