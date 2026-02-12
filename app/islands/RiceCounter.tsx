@@ -1,70 +1,73 @@
-import { useState, useEffect, useCallback } from 'react'
-import { UtensilsCrossed } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { UtensilsCrossed } from '../components/icons'
 import Card from '../components/Card'
 
-const GRAINS_PER_MEAL = 3_250
-const MEALS_PER_DAY = 3
-const STORAGE_KEY = 'useless-dashboard-birthday'
+// 日本人の平均米消費量: 年間約53kg → 1日約145g → 約6,600粒/日
+const GRAIN_WEIGHT_G = 0.022
+const ANNUAL_CONSUMPTION_KG = 53
+const GRAINS_PER_DAY = Math.round(
+  (ANNUAL_CONSUMPTION_KG * 1000) / 365 / GRAIN_WEIGHT_G
+)
+// 離乳食開始: 生後5ヶ月
+const RICE_START_DAYS = 5 * 30
+const OKU = 100_000_000
+const MAN = 10_000
 
-export default function RiceCounter() {
-  const [birthday, setBirthday] = useState<string>('')
-  const [grains, setGrains] = useState<number | null>(null)
+function formatLarge(n: number): { value: string; unit: string } | null {
+  if (n >= OKU) return { value: (n / OKU).toFixed(2), unit: '億' }
+  if (n >= MAN * 100) return { value: Math.round(n / MAN).toLocaleString(), unit: '万' }
+  return null
+}
+
+interface Props {
+  birthday: string
+}
+
+export default function RiceCounter({ birthday }: Props) {
+  const [grains, setGrains] = useState(0)
 
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY)
-    if (saved) setBirthday(saved)
-  }, [])
-
-  const calcGrains = useCallback((birthStr: string) => {
-    if (!birthStr) return null
-    const birth = new Date(birthStr)
-    const now = new Date()
-    const days = (now.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24)
-    if (days < 0) return null
-    return Math.floor(days * MEALS_PER_DAY * GRAINS_PER_MEAL)
-  }, [])
-
-  useEffect(() => {
-    if (!birthday) {
-      setGrains(null)
-      return
-    }
+    const birth = new Date(birthday)
 
     let animId: number
     const update = () => {
-      setGrains(calcGrains(birthday))
+      const now = new Date()
+      const totalDays = (now.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24)
+      const riceDays = Math.max(0, totalDays - RICE_START_DAYS)
+      setGrains(Math.floor(riceDays * GRAINS_PER_DAY))
       animId = requestAnimationFrame(update)
     }
     update()
     return () => cancelAnimationFrame(animId)
-  }, [birthday, calcGrains])
+  }, [birthday])
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value
-    setBirthday(val)
-    if (val) {
-      localStorage.setItem(STORAGE_KEY, val)
-    }
-  }
+  const large = formatLarge(grains)
 
   return (
-    <Card icon={<UtensilsCrossed size={20} />} title="食べたご飯の粒数">
-      {grains !== null ? (
-        <p className="counter-value text-3xl font-mono font-bold tabular-nums text-rose-300">
-          {grains.toLocaleString()}粒
+    <Card
+      icon={<UtensilsCrossed size={18} />}
+      title="米粒消費量"
+      accent="zinc"
+      info={
+        <>
+          <p>日本人は年間約{ANNUAL_CONSUMPTION_KG}kgのお米を食べています。お米1粒の重さは約{GRAIN_WEIGHT_G}gなので、1日あたり約{GRAINS_PER_DAY.toLocaleString()}粒を食べている計算です。</p>
+          <p>ちなみに1960年代は年間118kgも食べていたので、今の倍以上。お米離れが進んでいるんですね。</p>
+          <p>赤ちゃんは離乳食が始まる生後5ヶ月頃からお米デビュー。それ以前は除外しています。</p>
+          <p className="mt-1"><a href="https://www.maff.go.jp/j/heya/sodan/1808/01.html" target="_blank" rel="noopener noreferrer" className="underline text-emerald-400 hover:text-emerald-500 transition-colors">出典: 農林水産省「お米の1人当たりの消費量」</a></p>
+        </>
+      }
+    >
+      <div className="flex flex-col h-full justify-center">
+        <p className="counter-value text-3xl font-mono font-bold tabular-nums text-zinc-100 tracking-tight">
+          {grains.toLocaleString()}
+          <span className="text-sm font-sans font-medium text-zinc-500 ml-2">粒</span>
         </p>
-      ) : (
-        <p className="text-xl text-gray-600">生年月日を入力してね</p>
-      )}
-      <div className="mt-3">
-        <input
-          type="date"
-          value={birthday}
-          onChange={handleChange}
-          className="bg-gray-800/80 border border-gray-700/60 rounded-lg px-3 py-1.5 text-sm text-gray-300 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/30 transition-colors"
-        />
+        {large && (
+          <p className="counter-value text-sm font-mono font-bold tabular-nums text-zinc-500 mt-2">
+            ≒ {large.value}<span className="text-xs font-sans font-normal text-zinc-600 ml-1">{large.unit}粒</span>
+          </p>
+        )}
       </div>
-      <p className="text-xs text-gray-600 mt-2">1食約{GRAINS_PER_MEAL.toLocaleString()}粒 × 1日{MEALS_PER_DAY}食で計算</p>
     </Card>
   )
 }

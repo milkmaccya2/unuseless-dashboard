@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Bath } from 'lucide-react'
+import { Bath } from '../components/icons'
 import Card from '../components/Card'
 
 const WORLD_POPULATION = 8_100_000_000
@@ -17,12 +17,20 @@ export default function ToiletCounter() {
     return () => clearInterval(interval)
   }, [])
 
+  // 万人単位で表示（例: 28,350万人）
+  const manNin = Math.round(count / 10_000)
+
   return (
-    <Card icon={<Bath size={20} />} title="今トイレ中の地球人">
-      <p className="counter-value text-3xl font-mono font-bold tabular-nums text-amber-300">
-        約{(count / 100_000_000).toFixed(1)}億人
+    <Card icon={<Bath size={18} />} title="今トイレ中の地球人" accent="amber">
+      <p className="counter-value text-2xl sm:text-3xl font-mono font-bold tabular-nums text-gray-800">
+        ~{manNin.toLocaleString()}
+        <span className="text-sm font-sans font-normal text-gray-400 ml-1.5">万人</span>
       </p>
-      <p className="text-xs text-gray-600 mt-2">世界人口81億 × 平均滞在率約3.5%</p>
+      <p className="text-[11px] text-gray-400 mt-3">
+        世界人口81億 × 滞在率 ~3.5%（1日約50分 ÷ 1440分）
+        <br />
+        <a href="https://studyfinds.org/average-adult-will-spend-416-days-bathroom/" target="_blank" rel="noopener noreferrer" className="underline text-amber-400 hover:text-amber-500 transition-colors">出典: Study Finds「416 days in the bathroom」</a>
+      </p>
     </Card>
   )
 }

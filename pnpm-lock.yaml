@@ -36,6 +36,9 @@ importers:
       '@hono/vite-build':
         specifier: ^1.0.0
         version: 1.9.2(hono@4.11.9)
+      '@hono/vite-dev-server':
+        specifier: ^0.25.0
+        version: 0.25.0(hono@4.11.9)(miniflare@3.20250718.3)(wrangler@3.114.17)
       '@tailwindcss/vite':
         specifier: ^4.0.0
         version: 4.1.18(vite@6.4.1(jiti@2.6.1)(lightningcss@1.30.2))
@@ -486,6 +489,19 @@ packages:
 
   '@hono/vite-dev-server@0.23.0':
     resolution: {integrity: sha512-tHV86xToed9Up0j/dubQW2PDP4aYNFDSfQrjcV6Ra7bqCGrxhtg/zZBmbgSco3aTxKOEPzDXKK+6seAAfsbIXw==}
+    engines: {node: '>=18.14.1'}
+    peerDependencies:
+      hono: '*'
+      miniflare: '*'
+      wrangler: '*'
+    peerDependenciesMeta:
+      miniflare:
+        optional: true
+      wrangler:
+        optional: true
+
+  '@hono/vite-dev-server@0.25.0':
+    resolution: {integrity: sha512-4j5rs7yUTOObU2/yCEHeWbf3C8m95SD9lhdUUE6CJ462Emp9vS94yiza2dsA8+ly5pdaIQW0cd4nhNVcwYL5tA==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: '*'
@@ -1728,6 +1744,15 @@ snapshots:
       hono: 4.11.9
 
   '@hono/vite-dev-server@0.23.0(hono@4.11.9)(miniflare@3.20250718.3)(wrangler@3.114.17)':
+    dependencies:
+      '@hono/node-server': 1.19.9(hono@4.11.9)
+      hono: 4.11.9
+      minimatch: 9.0.5
+    optionalDependencies:
+      miniflare: 3.20250718.3
+      wrangler: 3.114.17
+
+  '@hono/vite-dev-server@0.25.0(hono@4.11.9)(miniflare@3.20250718.3)(wrangler@3.114.17)':
     dependencies:
       '@hono/node-server': 1.19.9(hono@4.11.9)
       hono: 4.11.9

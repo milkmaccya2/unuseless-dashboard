@@ -1,45 +1,100 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
 
 @theme {
-  --font-sans: 'Noto Sans JP', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --color-zinc-950: #09090b;
+  --color-zinc-900: #18181b;
+  --color-zinc-800: #27272a;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-600: #52525b;
+  --color-zinc-500: #71717a;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-50: #fafafa;
+
+  --font-sans: "LINE Seed JP", "Inter", system-ui, sans-serif;
+  --font-mono: "LINE Seed JP", "JetBrains Mono", monospace;
+  --font-display: "LINE Seed JP", "Inter", sans-serif;
+}
+
+/* ── Base ── */
+:root {
+  color-scheme: dark;
 }
 
 body {
-  background: linear-gradient(135deg, #0a0a0f 0%, #0d1117 50%, #0a0a1a 100%);
-  font-family: 'Noto Sans JP', sans-serif;
-}
-
-/* Card hover glow */
-.card-glow {
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.card-glow:hover {
-  border-color: rgba(99, 102, 241, 0.4);
-  box-shadow: 0 0 24px -4px rgba(99, 102, 241, 0.15);
-}
-
-/* Counter number glow pulse */
-.counter-value {
-  text-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-}
-
-/* Subtle grid background pattern */
-.grid-bg {
+  background-color: var(--color-zinc-950);
   background-image:
-    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
-  background-size: 40px 40px;
+    radial-gradient(circle at 50% 0%, rgba(120, 119, 198, 0.15) 0%, transparent 40%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px, 24px 24px;
+  background-attachment: fixed;
+  font-family: var(--font-sans);
+  color: var(--color-zinc-50);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Scrollbar styling */
+/* ── Card base ── */
+.dashboard-card {
+  position: relative;
+  background: rgba(24, 24, 27, 0.6);
+  /* zinc-900 with opacity */
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  /* overflow: hidden; Removed to allow popover to overflow */
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.dashboard-card:hover {
+  background: rgba(39, 39, 42, 0.8);
+  /* zinc-800 with opacity */
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ── Counter number ── */
+.counter-value {
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* ── Icon container ── */
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* ── Scrollbar ── */
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-zinc-800);
   border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-zinc-700);
+}
+
+/* ── Inputs ── */
+input[type="date"] {
+  color-scheme: dark;
 }
