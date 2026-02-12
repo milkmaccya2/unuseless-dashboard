@@ -1,7 +1,7 @@
 import { type ReactNode, useState, useRef, useEffect } from 'react'
 import { HelpCircle, X } from './icons'
 
-type AccentColor = 'blue' | 'emerald' | 'amber' | 'rose' | 'cyan' | 'violet' | 'sky' | 'zinc'
+type AccentColor = 'blue' | 'emerald' | 'amber' | 'rose' | 'cyan' | 'violet' | 'sky' | 'zinc' | 'red' | 'orange' | 'yellow'
 
 interface CardProps {
   icon: ReactNode
@@ -22,6 +22,9 @@ const accentStyles: Record<AccentColor, { iconBg: string; iconText: string; bord
   violet:  { iconBg: 'bg-violet-500/10',  iconText: 'text-violet-400',  border: 'border-violet-500/20' },
   sky:     { iconBg: 'bg-sky-500/10',     iconText: 'text-sky-400',     border: 'border-sky-500/20' },
   zinc:    { iconBg: 'bg-zinc-500/10',    iconText: 'text-zinc-400',    border: 'border-zinc-500/20' },
+  red:     { iconBg: 'bg-red-500/10',     iconText: 'text-red-400',     border: 'border-red-500/20' },
+  orange:  { iconBg: 'bg-orange-500/10',  iconText: 'text-orange-400',  border: 'border-orange-500/20' },
+  yellow:  { iconBg: 'bg-yellow-500/10',  iconText: 'text-yellow-400',  border: 'border-yellow-500/20' },
 }
 
 export default function Card({ icon, title, children, info, className = '', wide = false, accent = 'zinc' }: CardProps) {

@@ -21,9 +21,14 @@ function formatLarge(n: number): { value: string; unit: string } | null {
 
 interface Props {
   birthday: string
+  prefecture: string
 }
 
-export default function RiceCounter({ birthday }: Props) {
+// Top Consumers: Fukui (18), Toyama (16), Niigata (15), Yamagata (06), Akita (05), Hokkaido (01)
+const RICE_LOVERS = ['18', '16', '15', '06', '05', '01']
+const RICE_LOVER_MULTIPLIER = 1.4 // ~75-80kg vs 53kg
+
+export default function RiceCounter({ birthday, prefecture }: Props) {
   const [grains, setGrains] = useState(0)
 
   useEffect(() => {
@@ -34,7 +39,11 @@ export default function RiceCounter({ birthday }: Props) {
       const now = new Date()
       const totalDays = (now.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24)
       const riceDays = Math.max(0, totalDays - RICE_START_DAYS)
-      setGrains(Math.floor(riceDays * GRAINS_PER_DAY))
+      let dailyGrains = GRAINS_PER_DAY
+      if (RICE_LOVERS.includes(prefecture)) {
+        dailyGrains = Math.round(dailyGrains * RICE_LOVER_MULTIPLIER)
+      }
+      setGrains(Math.floor(riceDays * dailyGrains))
       animId = requestAnimationFrame(update)
     }
     update()
@@ -51,9 +60,15 @@ export default function RiceCounter({ birthday }: Props) {
       info={
         <>
           <p>日本人は年間約{ANNUAL_CONSUMPTION_KG}kgのお米を食べています。お米1粒の重さは約{GRAIN_WEIGHT_G}gなので、1日あたり約{GRAINS_PER_DAY.toLocaleString()}粒を食べている計算です。</p>
+          {RICE_LOVERS.includes(prefecture) && (
+            <p className="text-emerald-300 font-bold mt-1">※北陸・東北・北海道などの米どころ出身者は、平均の1.4倍（推計）のご飯を食べていることになります。</p>
+          )}
           <p>ちなみに1960年代は年間118kgも食べていたので、今の倍以上。お米離れが進んでいるんですね。</p>
           <p>赤ちゃんは離乳食が始まる生後5ヶ月頃からお米デビュー。それ以前は除外しています。</p>
-          <p className="mt-1"><a href="https://www.maff.go.jp/j/heya/sodan/1808/01.html" target="_blank" rel="noopener noreferrer" className="underline text-emerald-400 hover:text-emerald-500 transition-colors">出典: 農林水産省「お米の1人当たりの消費量」</a></p>
+          <p className="mt-1 flex flex-col gap-1">
+            <a href="https://www.maff.go.jp/j/heya/sodan/1808/01.html" target="_blank" rel="noopener noreferrer" className="underline text-emerald-400 hover:text-emerald-500 transition-colors">出典: 農林水産省「お米の1人当たりの消費量」</a>
+            <a href="https://www.stat.go.jp/data/kakei/" target="_blank" rel="noopener noreferrer" className="underline text-emerald-400 hover:text-emerald-500 transition-colors">参考: 総務省統計局「家計調査」（地域別消費）</a>
+          </p>
         </>
       }
     >

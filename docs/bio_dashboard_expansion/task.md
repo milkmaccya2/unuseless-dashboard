@@ -1,0 +1,26 @@
+# Bio Dashboard Expansion Task List
+
+- [x] Create `HairGrowth` Island
+    - [x] Implement real-time calculation (0.4mm/day)
+    - [x] Add to Dashboard
+- [x] Create `NailGrowth` Island
+    - [x] Implement calculation (All 20 nails combined: ~51mm/month)
+    - [x] Add to Dashboard
+- [x] Update `Dashboard` Onboarding
+    - [x] Add Prefecture Selector
+    - [x] Persist prefecture to localStorage
+- [x] Create `MikanConsumption` Island
+    - [x] Implement calculation based on prefecture (Wakayama/Ehime boost)
+    - [x] Add to Dashboard
+- [x] Create `GyozaConsumption` Island
+    - [x] Implement calculation based on prefecture (Utsunomiya/Hamamatsu boost)
+    - [x] Add to Dashboard
+- [x] Create `Heartbeat` Island
+    - [x] Implement calculation (~80 bpm)
+    - [x] Add to Dashboard
+- [x] Create `SalivaLake` Island
+    - [x] Implement calculation (~1.5L/day)
+    - [x] Add to Dashboard
+- [x] Final UI Adjustments
+    - [x] Verify responsive layout in `Dashboard.tsx`
+    - [x] Adjust meaningful digits/units
