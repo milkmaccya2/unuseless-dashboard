@@ -102,7 +102,7 @@ export default function Dashboard() {
   if (!birthday) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <div className="dashboard-card p-8 sm:p-10 max-w-sm w-full text-center flex flex-col items-center border border-zinc-800 bg-zinc-900/50 backdrop-blur-xl">
+        <div className="dashboard-card card-visible p-8 sm:p-10 max-w-sm w-full text-center flex flex-col items-center border border-zinc-800 bg-zinc-900/50 backdrop-blur-xl">
           <div className="flex justify-center mb-6">
             <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-zinc-800 text-zinc-400">
               <Cake size={32} strokeWidth={1.5} />
