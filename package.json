@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --mode client && vite build",
-    "preview": "wrangler pages dev dist"
+    "preview": "wrangler pages dev dist",
+    "deploy": "pnpm build && wrangler pages deploy ./dist",
+    "deploy:preview": "pnpm build && wrangler pages deploy ./dist --branch preview"
   },
   "dependencies": {
     "@gsap/react": "^2.1.0",

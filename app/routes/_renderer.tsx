@@ -13,9 +13,8 @@ export default reactRenderer(({ children, title }) => {
         <title>{title ?? 'Useless Dashboard'}</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* Added Inter and JetBrains Mono for modern look */}
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=LINE+Seed+JP:wght@400;700&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href={import.meta.env.PROD ? '/static/assets/style.css' : '/app/style.css'} />
+        <link rel="stylesheet" href={import.meta.env.PROD ? '/static/assets/client.css' : '/app/style.css'} />
         {import.meta.env.PROD ? (
           <script type="module" src="/static/client.js"></script>
         ) : (

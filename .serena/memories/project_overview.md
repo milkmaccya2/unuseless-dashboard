@@ -9,7 +9,7 @@ A fun "useless dashboard" that displays trivially interesting real-time data (bl
 - **Animation**: GSAP 3 (ScrollTrigger now free)
 - **Icons**: lucide-react
 - **Fonts**: Inter, Noto Sans JP, JetBrains Mono
-- **Deploy**: Cloudflare Pages (via wrangler)
+- **Deploy**: Cloudflare Pages (via wrangler) - https://unuseless-dashboard.pages.dev/
 - **Package Manager**: pnpm
 
 ## Key Commands

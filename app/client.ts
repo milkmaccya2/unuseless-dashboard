@@ -1,4 +1,5 @@
 import { createClient } from 'honox/client'
+import './style.css'
 
 createClient({
   hydrate: async (elem, root) => {

@@ -1,0 +1,6 @@
+# ローカル開発用の環境変数
+# このファイルをコピーして .dev.vars を作成してください
+# cp .dev.vars.example .dev.vars
+#
+# 本番環境の環境変数は Cloudflare ダッシュボードまたは
+# wrangler secret put <KEY> で設定してください
