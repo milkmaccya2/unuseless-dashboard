@@ -7,7 +7,6 @@ description: Skill for parsing, organizing, and implementing fixes based on GitH
 
 This skill provides a structured workflow for addressing review comments from a GitHub Pull Request that aims to merge the current feature branch into the `main` branch.
 このスキルは、現在の機能ブランチを `main` ブランチにマージすることを目的としたGitHubプルリクエストのレビュー指摘事項に対応するための構造化されたワークフローを提供します。
-このスキルは、GitHubのプルリクエストにおけるレビュー指摘事項に対応するための構造化されたワークフローを提供します。
 
 ## Workflow / ワークフロー
 
