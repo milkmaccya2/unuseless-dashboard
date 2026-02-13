@@ -39,6 +39,13 @@ export default function Dashboard() {
     if (saved) {
       setBirthday(saved)
       setInputValue(saved)
+    } else {
+      const today = new Date();
+      today.setFullYear(today.getFullYear() - 30);
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const day = String(today.getDate()).padStart(2, '0');
+      setInputValue(`${year}-${month}-${day}`);
     }
     if (savedPref) {
       setPrefecture(savedPref)
