@@ -11,7 +11,6 @@
 |-------|-----------|
 | Framework | [HonoX](https://github.com/honojs/honox) (Hono + Vite SSR) |
 | UI | React 19 + Tailwind CSS 4 |
-
 | Icons | lucide-react |
 | Deploy | Cloudflare Pages |
 | Package Manager | pnpm |
