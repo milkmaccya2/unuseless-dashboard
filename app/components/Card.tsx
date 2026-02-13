@@ -31,6 +31,7 @@ export default function Card({ icon, title, children, info, className = '', wide
   const a = accentStyles[accent] || accentStyles.zinc
   const [showInfo, setShowInfo] = useState(false)
   const popoverRef = useRef<HTMLDivElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!showInfo) return
@@ -43,9 +44,14 @@ export default function Card({ icon, title, children, info, className = '', wide
     return () => document.removeEventListener('mousedown', handleClick)
   }, [showInfo])
 
+  useEffect(() => {
+    cardRef.current?.classList.toggle('z-40', showInfo)
+  }, [showInfo])
+
   return (
     <div
-      className={`dashboard-card group flex flex-col p-5 ${wide ? 'col-span-1 sm:col-span-2' : ''} ${showInfo ? 'z-40' : ''} ${className}`}
+      ref={cardRef}
+      className={`dashboard-card group flex flex-col p-5 ${wide ? 'col-span-1 sm:col-span-2' : ''} ${className}`}
     >
       {/* Header */}
       <div className="flex items-center gap-3 mb-4">
@@ -59,7 +65,8 @@ export default function Card({ icon, title, children, info, className = '', wide
           <div className="relative">
             <button
               onClick={() => setShowInfo(!showInfo)}
-              className="text-zinc-600 hover:text-zinc-300 transition-colors"
+              // Increased click area with padding, compensated with negative margin
+              className="text-zinc-600 hover:text-zinc-300 transition-colors p-2 -m-2"
             >
               <HelpCircle size={14} />
             </button>
