@@ -45,12 +45,7 @@ export default function Card({ icon, title, children, info, className = '', wide
   }, [showInfo])
 
   useEffect(() => {
-    if (!cardRef.current) return
-    if (showInfo) {
-      cardRef.current.classList.add('z-40')
-    } else {
-      cardRef.current.classList.remove('z-40')
-    }
+    cardRef.current?.classList.toggle('z-40', showInfo)
   }, [showInfo])
 
   return (
