@@ -12,9 +12,7 @@
     "deploy:preview": "pnpm build && wrangler pages deploy ./dist --branch preview"
   },
   "dependencies": {
-    "@gsap/react": "^2.1.0",
     "@hono/react-renderer": "^1.0.0",
-    "gsap": "^3.12.0",
     "hono": "^4.7.0",
     "honox": "^0.1.0",
     "lucide-react": "^0.563.0",

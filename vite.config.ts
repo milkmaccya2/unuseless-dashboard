@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
   }
   return {
     ssr: {
-      external: ['react', 'react-dom', 'gsap'],
+      external: ['react', 'react-dom'],
     },
     plugins: [
       honox({ devServer: { adapter } }),

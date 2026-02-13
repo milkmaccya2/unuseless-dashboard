@@ -64,40 +64,30 @@ export default function Dashboard() {
     )
   }, [])
 
-  // GSAP staggered card entrance with ScrollTrigger
+  // Staggered card entrance with Intersection Observer
   useEffect(() => {
-    if (!birthday) return
+    if (!birthday || !container.current) return
 
-    let ctx: { revert: () => void } | undefined
-    Promise.all([
-      import('gsap'),
-      import('gsap/ScrollTrigger'),
-    ]).then(([{ default: gsap }, { ScrollTrigger }]) => {
-      gsap.registerPlugin(ScrollTrigger)
-
-      ctx = gsap.context(() => {
-        const cards = gsap.utils.toArray<HTMLElement>('.dashboard-card')
-        cards.forEach((card, i) => {
-          gsap.fromTo(card,
-            { y: 20, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.5,
-              delay: i * 0.05,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: card,
-                start: 'top 95%',
-                once: true,
-              },
-            }
-          )
+    const cards = container.current.querySelectorAll<HTMLElement>('.dashboard-card')
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement
+            el.classList.add('card-visible')
+            observer.unobserve(el)
+          }
         })
-      }, container)
+      },
+      { threshold: 0, rootMargin: '0px 0px -5% 0px' }
+    )
+
+    cards.forEach((card, i) => {
+      card.style.transitionDelay = `${i * 50}ms`
+      observer.observe(card)
     })
 
-    return () => ctx?.revert()
+    return () => observer.disconnect()
   }, [birthday])
 
   const handleStart = () => {
