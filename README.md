@@ -3,7 +3,7 @@
 知っても何の役にも立たないダッシュボード。
 今日のまばたき回数、呼吸回数、爪の伸び、餃子消費量など、トリビアルなリアルタイムデータを表示する。
 
-**Live**: https://unuseless-dashboard.pages.dev/
+**Live**: https://unuseless.milkmaccya.com/
 
 ## Tech Stack
 
@@ -23,35 +23,13 @@ app/
   client.ts              # Client entry point
   server.ts              # Server entry point (Hono)
   style.css              # Global CSS (Tailwind + custom)
-  components/
-    Card.tsx             # Reusable card (accent color system)
-    Sidebar.tsx          # Sidebar navigation
-    MobileHeader.tsx     # Mobile header
-    Footer.tsx           # Footer
-    icons.tsx            # Icon components
-  islands/               # Interactive island components
-    Dashboard.tsx        # Main dashboard layout
-    BlinkCounter.tsx     # まばたき回数
-    BreathCounter.tsx    # 呼吸回数
-    Heartbeat.tsx        # 心拍数
-    RiceCounter.tsx      # 米粒消費量
-    ToiletCounter.tsx    # トイレ回数
-    HairGrowth.tsx       # 髪の伸び
-    NailGrowth.tsx       # 爪の伸び
-    SalivaLake.tsx       # 唾液量
-    GyozaConsumption.tsx # 餃子消費量
-    MikanConsumption.tsx # みかん消費量
-    RotationSpeed.tsx    # 地球の自転速度
-    SeaLevel.tsx         # 海面水位
-    IssTracker.tsx       # ISS 現在位置
+  components/            # Shared UI components (Navigation, Cards, Icons)
+  islands/               # Interactive Island components (Counters, Visualizations)
   routes/
     index.tsx            # Top page
     _renderer.tsx        # HTML renderer
-    api/
-      iss.ts             # ISS position API proxy
-      elevation.ts       # Elevation API proxy
-  utils/
-    prefectures.ts       # Prefecture data
+    api/                 # API endpoints
+  utils/                 # Utility functions and data
 .github/
   workflows/
     deploy.yml           # Production deploy (main push)
